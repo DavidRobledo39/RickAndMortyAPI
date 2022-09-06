@@ -4,10 +4,10 @@ import {getCharacters} from './redux/actions'
 
 function App() {
   const data = useSelector((state) => state);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCharacters);
+    dispatch(getCharacters());
     console.log(data);
   },[dispatch])
 

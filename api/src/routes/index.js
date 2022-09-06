@@ -10,12 +10,12 @@ router.get("/characters", async (req, res) => {
   const rickApi = await axios
     .get("https://rickandmortyapi.com/api/character")
     .catch((err) => console.log(err))
-    .then((res) => res.data);
-
+    .then((res) => res.data.results);
   try {
     const rickDB = await Character.findAll();
-    // data.push(rickApi);
-    // data.push(rickDB);
+    
+    data = rickApi.concat(rickDB);
+
     res.status(200).json(data);
   } catch (err) {
     res.status(400).send(err);
