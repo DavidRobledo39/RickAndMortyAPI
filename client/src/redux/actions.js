@@ -4,7 +4,6 @@ import {GET_CHARACTERS, GET_EPISODES, CREATE_CHARACTER} from './actionTypes';
 export function getCharacters() {
     return async function (dispatch) {
         const characters = await axios.get("http://localhost:3001/characters")
-        console.log(characters);
         return dispatch({
             type: GET_CHARACTERS,
             payload: characters.data,

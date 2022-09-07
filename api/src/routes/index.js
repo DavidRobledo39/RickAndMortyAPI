@@ -13,11 +13,11 @@ router.get("/characters", async (req, res) => {
     .then((res) => res.data.results);
   try {
     const rickDB = await Character.findAll();
-    
+
     data = rickApi.concat(rickDB);
 
     res.status(200).json(data);
-  } catch (err) {
+  } catch (err) { 
     res.status(400).send(err);
   }
 });
@@ -41,7 +41,7 @@ router.get("/episodes", async (req, res) => {
 });
 
 router.post("/character", async (req, res) => {
-  const { id, name, species, image, created, origin } = req.query;
+  const { id, name, species, image, created, origin, episodes } = req.body;
 
   const createCharacter = await Character.create({
     id,
@@ -52,11 +52,17 @@ router.post("/character", async (req, res) => {
     origin,
   });
 
-  const searchEpisode = await Episode.findAll({
-    where: { name: episode },
-  });
-  createCharacter.addEpisode(searchEpisode);
-  
+  if (episodes.length) {
+    try {
+      episodes.forEach(async (epi) => {
+        let episode = await Episode.findByPk(epi)
+        createCharacter.addEpisode(episode)
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+ 
   res.status(200).send("Character created successfully");
 });
 

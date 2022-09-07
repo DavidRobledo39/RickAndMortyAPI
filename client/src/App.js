@@ -1,20 +1,16 @@
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import {getCharacters} from './redux/actions'
+
+import  Home  from "./Components/Home";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
-  const data = useSelector((state) => state);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getCharacters());
-    console.log(data);
-  },[dispatch])
 
   return (
-    <div>
-      <button onClick={()=>console.log(data)}>Get Characters</button>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

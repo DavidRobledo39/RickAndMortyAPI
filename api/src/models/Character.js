@@ -8,7 +8,8 @@ module.exports = (sequelize) => {
     name: { type: DataTypes.STRING, allowNull: false },
     species: { type: DataTypes.STRING, allowNull: false },
     origin: { type: DataTypes.STRING, allowNull: false },
-    image: { type: DataTypes.STRING, allowNull: false },
+    image: { type: DataTypes.STRING },
     created: { type: DataTypes.STRING, allowNull: false },
   });
 };
+  
