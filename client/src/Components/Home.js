@@ -18,12 +18,12 @@ export default function Home() {
       {allCharacters.length &&
         allCharacters.map((obj) => (
           <Card
-            key={obj.id}
             name={obj.name}
             image={obj.image}
             origin={obj.origin}
             species={obj.species}
-            episodes={obj.episode}
+            episode={obj.episode}
+            episodes={obj.episodes}
           />
         ))}
     </div>

@@ -11,13 +11,20 @@ router.get("/characters", async (req, res) => {
     .get("https://rickandmortyapi.com/api/character")
     .catch((err) => console.log(err))
     .then((res) => res.data.results);
+
   try {
-    const rickDB = await Character.findAll();
+    const rickDB = await Character.findAll({
+      include: {
+        model: Episode,
+        attributes: ["name"],
+        through: { attributes: [] },
+      },
+    });
 
     data = rickApi.concat(rickDB);
 
     res.status(200).json(data);
-  } catch (err) { 
+  } catch (err) {
     res.status(400).send(err);
   }
 });
@@ -51,18 +58,18 @@ router.post("/character", async (req, res) => {
     created,
     origin,
   });
-
-  if (episodes.length) {
-    try {
+  console.log(episodes);
+  if (episodes.length) { 
+    try { 
       episodes.forEach(async (epi) => {
-        let episode = await Episode.findByPk(epi)
-        createCharacter.addEpisode(episode)
-      })
+        let episode = await Episode.findByPk(epi);
+        createCharacter.addEpisode(episode);
+      });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
- 
+
   res.status(200).send("Character created successfully");
 });
 
