@@ -1,3 +1,4 @@
 export const GET_CHARACTERS = 'GET_CHARACTERS';
 export const GET_EPISODES = 'GET_EPISODES';
 export const CREATE_CHARACTER = 'CREATE_CHARACTER';
+export const PAGINADO = 'PAGINADO';

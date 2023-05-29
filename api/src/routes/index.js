@@ -73,4 +73,18 @@ router.post("/character", async (req, res) => {
   res.status(200).send("Character created successfully");
 });
 
+router.get('/info', async(req,res)=>{
+ 
+ const api= await axios.get('https://rickandmortyapi.com/api/character')
+  .then((res)=>res.data.info)
+  .catch((err)=> console.log(err))
+
+try {
+  res.status(202).json(api)
+} catch (error) {
+  res.status(404).send(error)
+}
+
+
+})
 module.exports = router;

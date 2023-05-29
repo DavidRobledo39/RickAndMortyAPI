@@ -1,9 +1,10 @@
 import axios from 'axios';
-import {GET_CHARACTERS, GET_EPISODES, CREATE_CHARACTER} from './actionTypes';
+import {GET_CHARACTERS, GET_EPISODES, CREATE_CHARACTER, PAGINADO} from './actionTypes';
 
 export function getCharacters() {
     return async function (dispatch) {
         const characters = await axios.get("http://localhost:3001/characters")
+       
         return dispatch({
             type: GET_CHARACTERS,
             payload: characters.data,
@@ -26,6 +27,16 @@ export function createCharacter(payload) {
         return dispatch({
             type: CREATE_CHARACTER,
             payload: characters.data,
+        })
+    }
+}
+export function changePage() {
+    return async function (dispatch) {
+        const info = await axios.get("http://localhost:3001/info")
+       
+        return dispatch({
+            type: PAGINADO,
+            payload: info.data,
         })
     }
 }

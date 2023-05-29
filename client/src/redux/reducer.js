@@ -1,8 +1,12 @@
-import {GET_CHARACTERS, GET_EPISODES, CREATE_CHARACTER} from './actionTypes';
+import {GET_CHARACTERS, GET_EPISODES, CREATE_CHARACTER, PAGINADO} from './actionTypes';
+
+
 const initialState = {
     characters: [],
-    episodes: []
+    episodes: [],
+    info:{}
 };
+
 
 export default function reducer(state = initialState, action) {
 	switch (action.type) {
@@ -23,9 +27,16 @@ export default function reducer(state = initialState, action) {
                 ...state
             }
         }
+        case PAGINADO:{
+            return{
+                ...state,
+                info: action.payload
+            }
+        }
         default: {
             return state
         }
     }
 }
+
 
